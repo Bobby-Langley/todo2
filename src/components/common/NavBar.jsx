@@ -4,38 +4,32 @@ import { Layout, Menu } from "antd";
 import { UserContext } from "../../App";
 const { Header } = Layout;
 
-// function NavBar() {
-//   const { user, setUser, firebaseAuth } = useContext(UserContext);
-//   function signOut() {
-//     firebaseAuth.signOut()
-//       .then(() => {
-//         setUser(null);
-//         localStorage.setItem('user', null);
-//       })
-//       .catch((error) => console.log(error));
-//   }
 function NavBar() {
-  const { user, setUser, firebaseAuth } = useContext(UserContext)
+  const { user, setUser, firebaseAuth } = useContext(UserContext);
   function signOut() {
-    firebaseAuth.signOut()
+    firebaseAuth
+      .signOut()
       .then(() => {
-        setUser(null)
-        localStorage.setItem('user', null)
+        setUser(null);
+        localStorage.setItem("user", null);
       })
-      .catch((error) => console.log(error))
+      .catch((error) => console.log(error));
   }
   return (
     <Header>
       <div className="logo" />
       <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["1"]}>
         <Menu.Item key="1">
-          <Link to="/">Home</Link>
+          <Link to="/">
+            {" "}
+            <img style={{ marginRight: "7px" }} width={36} height={36} src="\favicon.png"></img>Home
+          </Link>
         </Menu.Item>
-        {user ? 
+        {user ? (
           <Menu.Item key="4" onClick={() => signOut()}>
             Logout
           </Menu.Item>
-         : 
+        ) : (
           <>
             <Menu.Item key="2">
               <Link to="/login">Log In</Link>
@@ -44,7 +38,7 @@ function NavBar() {
               <Link to="/signup">Sign Up</Link>
             </Menu.Item>
           </>
-        }
+        )}
       </Menu>
     </Header>
   );

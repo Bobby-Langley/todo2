@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { UserContext } from "../App";
 import Head from "../components/home/Head";
 import TodoList from "../components/home/TodoList";
-      
+
 //figure out delete button
 function Home() {
   const [todoListItems, setTodoListItems] = useState([]);
@@ -18,8 +18,8 @@ function Home() {
           setLoading(false);
         })
         .catch((e) => {
-          console.log(e)
-          setLoading(false)
+          console.log(e);
+          setLoading(false);
         });
     } else {
       setTodoListItems([]);
@@ -29,12 +29,7 @@ function Home() {
   return (
     <>
       <Head setTodoListItems={setTodoListItems} setLoading={setLoading} />
-      <TodoList
-        todoListItems={todoListItems}
-        setTodoListItems={setTodoListItems}
-        loading={loading}
-        setLoading={setLoading}
-      />
+      <TodoList todoListItems={todoListItems} setTodoListItems={setTodoListItems} loading={loading} setLoading={setLoading} />
     </>
   );
 }

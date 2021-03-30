@@ -1,9 +1,9 @@
-import React, {useContext, useState } from 'react'
-import firebase from 'firebase'
-import { useHistory } from "react-router-dom"
-import { Form, Input, Button, Checkbox, Typography } from 'antd';
-import {GoogleOutlined} from '@ant-design/icons'
-import {UserContext} from '../App'
+import React, { useContext, useState } from "react";
+import firebase from "firebase";
+import { useHistory } from "react-router-dom";
+import { Form, Input, Button, Checkbox, Typography } from "antd";
+import { GoogleOutlined } from "@ant-design/icons";
+import { UserContext } from "../App";
 
 const layout = {
   labelCol: {
@@ -20,46 +20,49 @@ const tailLayout = {
   },
 };
 
-
 const Login = () => {
-    const [error, setError] = useState(null)
-    const [loading, setLoading] = useState(false)
-    const {setUser, firebaseAuth } = useContext(UserContext)
-    let history = useHistory() 
-    const onFinish = ({email, password}) => {
-      firebaseAuth.signInWithEmailAndPassword(email, password)
-        .then(res =>{
-            setError(null)
-            setUser(res.user)
-            setLoading(false)
-            history.push("/")  
-        })
-        .catch(err=> setError(err.message))
-      };
-      const loginWithGoogle = () => {
-        setLoading(true)
-        const provider = new firebase.auth.GoogleAuthProvider()
-        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
-  .then(() => {
-    firebase.auth().signInWithPopup(provider)
-    .then(res =>{
-        setError(null)
-        setUser(res.user)
-        console.log(res.user)
-        setLoading(false)
-        localStorage.setItem('user', JSON.stringify(res.user))
-        history.push("/")  
-    })
-  })
-        .catch(err=> {
-          setLoading(false);
-          setError(err.message)
-      
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const { setUser, firebaseAuth } = useContext(UserContext);
+  let history = useHistory();
+  const onFinish = ({ email, password }) => {
+    firebaseAuth
+      .signInWithEmailAndPassword(email, password)
+      .then((res) => {
+        setError(null);
+        setUser(res.user);
+        setLoading(false);
+        history.push("/");
       })
-    }
-      const onFinishFailed = (errorInfo) => {
-        console.log('Failed:', errorInfo);
-    setError('Please input a valid email and password')
+      .catch((err) => setError(err.message));
+  };
+  const loginWithGoogle = () => {
+    setLoading(true);
+    const provider = new firebase.auth.GoogleAuthProvider();
+    firebase
+      .auth()
+      .setPersistence(firebase.auth.Auth.Persistence.SESSION)
+      .then(() => {
+        firebase
+          .auth()
+          .signInWithPopup(provider)
+          .then((res) => {
+            setError(null);
+            setUser(res.user);
+            console.log(res.user);
+            setLoading(false);
+            localStorage.setItem("user", JSON.stringify(res.user));
+            history.push("/");
+          });
+      })
+      .catch((err) => {
+        setLoading(false);
+        setError(err.message);
+      });
+  };
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
+    setError("Please input a valid email and password");
   };
 
   return (
@@ -78,7 +81,7 @@ const Login = () => {
         rules={[
           {
             required: true,
-            message: 'Please input your username!',
+            message: "Please input your username!",
           },
         ]}
       >
@@ -91,7 +94,7 @@ const Login = () => {
         rules={[
           {
             required: true,
-            message: 'Please input your password!',
+            message: "Please input your password!",
           },
         ]}
       >
@@ -103,28 +106,18 @@ const Login = () => {
       </Form.Item>
 
       <Form.Item {...tailLayout}>
-      
         <Button type="primary" htmlType="submit">
           Log In
         </Button>
         {error && <Typography.Text type="danger">{error}</Typography.Text>}
-        
-        </Form.Item> 
-       <Form.Item {...tailLayout}>
-        <Button
-          type="primary"
-          icon={< GoogleOutlined />}
-          loading={loading}
-          onClick={() => loginWithGoogle()}
-        >
+      </Form.Item>
+      <Form.Item {...tailLayout}>
+        <Button type="primary" icon={<GoogleOutlined />} loading={loading} onClick={() => loginWithGoogle()}>
           Continue with Google
         </Button>
       </Form.Item>
     </Form>
   );
-        
 };
 
-
-
-export default Login
+export default Login;
