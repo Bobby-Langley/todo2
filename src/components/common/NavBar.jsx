@@ -21,7 +21,7 @@ function NavBar() {
       <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["1"]}>
         <Menu.Item key="1">
           <Link to="/">
-            {" "}
+            
             <img style={{ marginRight: "7px" }} width={36} height={36} src="\favicon.png"></img>Home
           </Link>
         </Menu.Item>

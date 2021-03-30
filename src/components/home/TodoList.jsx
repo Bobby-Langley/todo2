@@ -36,12 +36,12 @@ function ListItem({ item, setLoading, setTodoListItems }) {
       actions={[
         // <Button primary key="list-done" type="link" onClick={()=>toggleItemDone( item, setLoading, setTodoListItems)} > Done </Button>,
         <Button danger key="list-delete" type="link" onClick={() => itemAction("done", item, setLoading, setTodoListItems)}>
-          {" "}
+          
           <CheckSquareTwoTone />
         </Button>,
         <Button danger key="list-delete" type="link" onClick={() => itemAction("delete", item, setLoading, setTodoListItems)}>
-          {" "}
-          <DeleteTwoTone />{" "}
+          
+          <DeleteTwoTone />
         </Button>,
         // <Button danger key="list-delete" type="link" onClick={()=> deleteTask(item, setTodoListItems, setLoading)} > <DeleteTwoTone/> </Button>
       ]}

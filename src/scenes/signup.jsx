@@ -99,10 +99,9 @@ const SignUp = () => {
         {error && (
           <>
             <Typography.Text type="danger">{error}</Typography.Text>
-            <br />
           </>
         )}
-        <br />
+
         <Button type="primary" htmlType="submit">
           Sign Up
         </Button>

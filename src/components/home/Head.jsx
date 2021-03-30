@@ -41,7 +41,7 @@ function Head({ setTodoListItems, setLoading }) {
   return (
     <header style={{ textAlign: "center", paddingBottom: "40px" }}>
       <h1>
-        Welcome, {greeting} {userImage}{" "}
+        Welcome, {greeting} {userImage}
       </h1>
 
       {user && (
